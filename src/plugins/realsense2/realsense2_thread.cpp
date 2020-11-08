@@ -56,7 +56,7 @@ Realsense2Thread::init()
 	  config->get_string_or_default((cfg_prefix + "switch_if_name").c_str(), "realsense2");
 	restart_after_num_errors_ =
 	  config->get_uint_or_default((cfg_prefix + "restart_after_num_errors").c_str(), 50);
-	frame_rate_  = config->get_uint_or_default((cfg_prefix + "frame_rate").c_str(), 30);
+	frame_rate_  = config->get_uint_or_default((cfg_prefix + "frame_rate").c_str(), 15);
 	laser_power_ = config->get_float_or_default((cfg_prefix + "laser_power").c_str(), -1);
 
 	cfg_use_switch_ = config->get_bool_or_default((cfg_prefix + "use_switch").c_str(), true);
@@ -106,7 +106,7 @@ Realsense2Thread::loop()
 	if (enable_camera_ && read_camera_control() != "") {
 		if (rs_rgb_pipe_->poll_for_frames(&rs_rgb_data_)) {
 			error_counter_               = 0;
-			rs2::video_frame color_frame = rs_rgb_data_.first(RS2_STREAM_COLOR, RS2_FORMAT_YUYV);
+			rs2::video_frame color_frame = rs_rgb_data_.first(RS2_STREAM_COLOR,1280,720, RS2_FORMAT_YUYV);
 			image_name_ =
 			  rgb_path_ + read_camera_control() + color_frame.get_profile().stream_name() + ".png";
 			stbi_write_png(image_name_.c_str(),
