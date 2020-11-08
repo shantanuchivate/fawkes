@@ -56,7 +56,7 @@ Realsense2Thread::init()
 	  config->get_string_or_default((cfg_prefix + "switch_if_name").c_str(), "realsense2");
 	restart_after_num_errors_ =
 	  config->get_uint_or_default((cfg_prefix + "restart_after_num_errors").c_str(), 50);
-	frame_rate_  = config->get_uint_or_default((cfg_prefix + "frame_rate").c_str(), 30);
+	frame_rate_  = config->get_uint_or_default((cfg_prefix + "frame_rate").c_str(), 15);
 	laser_power_ = config->get_float_or_default((cfg_prefix + "laser_power").c_str(), -1);
 
 	cfg_use_switch_ = config->get_bool_or_default((cfg_prefix + "use_switch").c_str(), true);
